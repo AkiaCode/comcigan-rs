@@ -49,3 +49,38 @@ impl Day {
         &self.studies[study - 1]
     }
 }
+
+#[derive(Serialize, Deserialize)]
+pub struct SchoolList {
+    pub 학교검색: Vec<School>
+}
+
+#[derive(Serialize, Deserialize)]
+pub struct School(u32, String, String, pub u32);
+
+#[derive(Serialize, Deserialize)]
+pub struct RawSchoolData {
+    pub timetable: Vec<Vec<Vec<Vec<u32>>>>,
+    pub subjects: Vec<String>,
+    pub teachers: Vec<String>
+}
+
+pub struct RawSchoolDataKey {
+    pub timetable: String,
+    pub subjects: String,
+    pub teachers: String,
+    pub encode_header: String,
+    pub url_piece: String
+}
+
+impl RawSchoolDataKey {
+    pub fn clone(&self) -> RawSchoolDataKey {
+        RawSchoolDataKey {
+            timetable: self.timetable.clone(),
+            subjects: self.subjects.clone(),
+            teachers: self.teachers.clone(),
+            encode_header: self.encode_header.clone(),
+            url_piece: self.url_piece.clone()
+        }
+    }
+}
